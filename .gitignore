@@ -1,0 +1,57 @@
+# ==========================================
+# Security / Secrets (보안 및 비밀 정보)
+# ==========================================
+# 환경 변수 파일 (데이터베이스 패스워드, API 키 등)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# SSL 인증서 및 개인 키
+*.pem
+*.key
+*.pub
+*.crt
+*.pfx
+*.p12
+**/certbot/
+**/certs/
+reverse-proxy/certbot/
+
+# ==========================================
+# Databases / Volatile Data (데이터베이스 및 데이터 저장소)
+# ==========================================
+# PostgreSQL 및 기타 DB 데이터 폴더 (호스트 마운트 대비)
+**/data/
+**/pgdata/
+
+# ==========================================
+# Dependencies (의존성 패키지)
+# ==========================================
+node_modules/
+jspm_packages/
+web_modules/
+
+# ==========================================
+# Logs (로그 파일)
+# ==========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# IDE / Editors / OS (개발 도구 및 운영체제 임시 파일)
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
