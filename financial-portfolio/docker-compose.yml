@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nextjs-app:
+    image: ${DOCKERHUB_USERNAME}/finance-portfolio:latest
+    container_name: nextjs-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres_password}@${DB_HOST:-postgres-db}:${DB_PORT:-5432}/${DB_NAME:-homeserver}
+      - DB_HOST=${DB_HOST:-postgres-db}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres_password}
+      - DB_NAME=${DB_NAME:-homeserver}
+      - DB_PORT=${DB_PORT:-5432}
+      - AI_API_KEY=${AI_API_KEY}
+    networks:
+      - homeserver-net
+
+networks:
+  homeserver-net:
+    external: true
+
