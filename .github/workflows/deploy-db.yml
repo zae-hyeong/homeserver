@@ -1,0 +1,32 @@
+name: Deploy DB Config to Home Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'DB/**' # DB 폴더 하위 변경 시 실행
+
+jobs:
+  print-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print DB changes detected
+        run: echo "DB 설정 변경이 감지되었습니다. 원격 배포는 주석 처리되어 대기 중입니다."
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # 홈 서버(Mac mini)에 SSH로 원격 접속하여 도커 컴포즈 갱신 명령어 실행
+  #     - name: SSH Remote Commands
+  #       uses: appleboy/ssh-action@v1.0.3
+  #       with:
+  #         host: ${{ secrets.SERVER_HOST }}     # 홈 서버의 외부 IP 또는 DDNS
+  #         username: ${{ secrets.SERVER_USER }} # 맥미니 계정 이름 (예: zaehyeong)
+  #         key: ${{ secrets.SERVER_SSH_KEY }}   # 맥미니 SSH 개인키
+  #         port: ${{ secrets.SERVER_PORT || 22 }}
+  #         script: |
+  #           cd ~/homeserver
+  #           git pull
+  #           cd ~/homeserver/DB
+  #           docker compose up -d

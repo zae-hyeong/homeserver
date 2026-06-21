@@ -1,0 +1,58 @@
+name: Deploy Finance Portfolio to Home Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'finance-portfolio/**' # finance-portfolio 폴더 하위 변경 시 실행
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Apple Silicon(M1/M2/M3/M4) 맥미니 환경에 맞게 ARM64 아키텍처 빌드 준비
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Docker Hub 로그인
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 이미지 빌드 및 푸시 (AMD64와 ARM64 멀티 아키텍처 지원 빌드)
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./finance-portfolio/app
+          file: ./finance-portfolio/app/Dockerfile
+          platforms: linux/amd64,linux/arm64 # 맥미니(ARM)와 일반 리눅스 모두 지원
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/finance-portfolio:latest
+
+  # deploy:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # 홈 서버(Mac mini)에 SSH로 원격 접속하여 도커 컴포즈 갱신 명령어 실행
+  #     - name: SSH Remote Commands
+  #       uses: appleboy/ssh-action@v1.0.3
+  #       with:
+  #         host: ${{ secrets.SERVER_HOST }}     # 홈 서버의 외부 IP 또는 DDNS
+  #         username: ${{ secrets.SERVER_USER }} # 맥미니 계정 이름 (예: zaehyeong)
+  #         key: ${{ secrets.SERVER_SSH_KEY }}   # 맥미니 SSH 개인키
+  #         port: ${{ secrets.SERVER_PORT || 22 }}
+  #         script: |
+  #           cd ~/homeserver
+  #           git pull
+  #           cd ~/homeserver/finance-portfolio
+  #           docker compose pull
+  #           docker compose up -d
