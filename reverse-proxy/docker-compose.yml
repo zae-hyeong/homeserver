@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   reverse-proxy:
@@ -12,7 +12,7 @@ services:
       - ./certbot/www:/var/www/certbot:ro
     networks:
       - proxy_net
-    depends_on: # TODO: 실제 애플리케이션 이미지
+    depends_on:
       - app_service
       
   certbot:
@@ -25,12 +25,17 @@ services:
     networks:
       - proxy_net
 
-  # TODO: 실제 애플리케이션 이미지
   app_service:
-    image: my-app-image 
+    build: ./app
+    restart: unless-stopped
+    volumes:
+      - ./app/routes.json:/app/routes.json
     networks:
       - proxy_net
+      - homeserver-net
 
 networks:
   proxy_net:
     driver: bridge
+  homeserver-net:
+    external: true
