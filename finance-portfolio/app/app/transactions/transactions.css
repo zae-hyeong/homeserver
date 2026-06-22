@@ -1,0 +1,388 @@
+/* ==========================================
+   주식 현황 페이지 프리미엄 라이트 테마 스타일
+   ========================================== */
+
+.stock-status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: fadeIn 0.4s ease-out;
+  padding: 4px;
+}
+
+/* 상단 헤더 프리미엄화 */
+.page-header-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-title-main {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.8px;
+}
+
+.header-subtitle-main {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+.refresh-btn {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.refresh-btn:hover {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transform: rotate(45deg);
+}
+
+/* 요약 위젯 카드 */
+.summary-widgets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.widget-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.widget-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.widget-value {
+  font-size: 1.6rem;
+  font-weight: 750;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+/* 필터 및 컨트롤 패널 */
+.controls-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background-color: var(--bg-secondary);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-group {
+  display: flex;
+  background-color: var(--bg-primary);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  background-color: var(--bg-secondary);
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+}
+
+/* 월별 필터 셀렉터 */
+.month-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s;
+}
+
+.month-selector-wrapper:focus-within {
+  border-color: var(--color-primary);
+}
+
+.selector-icon {
+  color: var(--text-muted);
+}
+
+.month-select {
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* 테이블 카드 래퍼 */
+.table-card-wrapper {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.table-scroll-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.stock-table-premium {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.stock-table-premium th {
+  padding: 16px 20px;
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.stock-table-premium th.sortable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.stock-table-premium th.sortable:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  color: var(--text-primary);
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.th-content.right {
+  justify-content: flex-end;
+}
+
+.sort-icon-inactive {
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+
+.stock-table-premium th:hover .sort-icon-inactive {
+  opacity: 0.7;
+}
+
+.sort-icon-active {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.stock-table-premium td {
+  padding: 16px 20px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.stock-table-premium tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stock-table-premium tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+/* 뱃지 및 특수 셀 데코레이션 */
+.institution-badge {
+  background-color: rgba(99, 102, 241, 0.08);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.account-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.stock-name-cell {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.highlight-amount {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.category-badge {
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  text-align: center;
+}
+
+.category-badge.stock {
+  background-color: rgba(6, 182, 212, 0.08);
+  color: var(--color-info);
+}
+
+.category-badge.cash {
+  background-color: rgba(16, 185, 129, 0.08);
+  color: var(--color-success);
+}
+
+.category-badge.etc {
+  background-color: rgba(245, 158, 11, 0.08);
+  color: var(--color-warning);
+}
+
+.weight-cell {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.note-cell {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 합계 행(Premium Sum) */
+.sum-row-premium {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-top: 2px solid var(--border-color);
+}
+
+.sum-row-premium td {
+  padding: 18px 20px;
+  font-size: 0.9rem;
+  border-bottom: none;
+}
+
+.font-bold {
+  font-weight: 750 !important;
+}
+
+/* 상승/하락 텍스트 */
+.text-up {
+  color: #2563eb !important; /* 모던 블루 */
+  font-weight: 600;
+}
+
+.text-down {
+  color: #dc2626 !important; /* 모던 레드 */
+  font-weight: 600;
+}
+
+/* Empty State */
+.empty-table-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  gap: 16px;
+  text-align: center;
+}
+
+.empty-table-state p {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* 공통 클래스 및 애니메이션 */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.num-font {
+  font-family: 'Plus Jakarta Sans', monospace;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 로딩/에러 래퍼 (globals.css 와 유사하지만 유지) */
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: var(--color-primary);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
