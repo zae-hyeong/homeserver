@@ -1,9 +1,0 @@
-node_modules
-.next
-out
-.git
-.gitignore
-.env*.local
-README.md
-Dockerfile
-.dockerignore
